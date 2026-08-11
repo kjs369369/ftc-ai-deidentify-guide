@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>따라하기: 나만의 사건자료 비식별 앱 만들기 | 공정거래위원회 실전 AI 클래스</title>
+<meta name="description" content="Claude에게 부탁해서 내 컴퓨터에서 실행하는 사건자료 비식별 앱 만들기. 공정거래위원회 실전 AI 클래스 심화 실습 가이드.">
+<meta name="author" content="AICLab 김진수">
+
+<!-- Open Graph / Facebook / KakaoTalk -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kjs369369.github.io/ftc-ai-deidentify-guide/">
+<meta property="og:title" content="따라하기: 나만의 사건자료 비식별 앱 만들기">
+<meta property="og:description" content="원본은 내 PC에서만, AI에는 비식별 사본만. 공정거래위원회 실전 AI 클래스 심화 실습 가이드.">
+<meta property="og:image" content="https://kjs369369.github.io/ftc-ai-deidentify-guide/og-image.png">
+<meta property="og:image:secure_url" content="https://kjs369369.github.io/ftc-ai-deidentify-guide/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="나만의 사건자료 비식별 앱 만들기 - 공정거래위원회 실전 AI 클래스">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="AICLab 실전 AI 클래스">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="따라하기: 나만의 사건자료 비식별 앱 만들기">
+<meta name="twitter:description" content="원본은 내 PC에서만, AI에는 비식별 사본만. 공정거래위원회 실전 AI 클래스 심화 실습 가이드.">
+<meta name="twitter:image" content="https://kjs369369.github.io/ftc-ai-deidentify-guide/og-image.png">
+<meta name="twitter:image:alt" content="나만의 사건자료 비식별 앱 만들기 - 공정거래위원회 실전 AI 클래스">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+<style>
+  :root{--ink:#1F3A5F;--gold:#C9A961;--paper:#fff;--cream:#FBF7F0;--rule:#E7E3DA;--ok:#2E7D64;--warn:#B23B3B;--muted:#6b6b6b;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Pretendard','Noto Sans KR','Malgun Gothic',sans-serif;background:var(--cream);color:#1a1a1a;line-height:1.6;}
+  .page{max-width:900px;margin:0 auto;padding:26px 22px 50px;}
+  .title{text-align:center;margin-bottom:6px;}
+  .title .kicker{color:var(--gold);font-weight:800;letter-spacing:1px;font-size:15px;}
+  .title h1{font-size:30px;color:var(--ink);font-weight:800;margin-top:4px;}
+  .title p{color:var(--muted);font-size:15px;margin-top:6px;}
+  .rule{background:#FDECEC;border:2px solid var(--warn);border-radius:14px;padding:14px 18px;margin:18px 0;text-align:center;font-size:17px;font-weight:700;color:#8a2b2b;}
+  .rule b{color:var(--warn);}
+  .scope{background:var(--paper);border:1px solid var(--rule);border-left:5px solid var(--gold);border-radius:12px;padding:14px 18px;margin:16px 0;}
+  .scope h3{font-size:15px;color:var(--ink);margin-bottom:6px;}
+  .scope p{font-size:14.5px;color:#333;}
+  .promptbox{background:var(--ink);color:#fff;border-radius:14px;padding:18px 20px;margin:16px 0;}
+  .promptbox .lab{font-size:14px;color:var(--gold);font-weight:800;margin-bottom:8px;}
+  .promptbox .code{background:#16283f;border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.7;white-space:pre-wrap;}
+  .promptbox .hint{font-size:13px;color:#c7d2e0;margin-top:8px;}
+  .two{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;}
+  .col{flex:1;min-width:300px;background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:18px 18px 20px;}
+  .col .head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .col .badge{background:var(--ink);color:#fff;font-weight:800;border-radius:10px;padding:5px 12px;font-size:15px;}
+  .col .badge.b{background:var(--gold);color:#3a2c10;}
+  .col .head h2{font-size:18px;color:var(--ink);}
+  .step{display:flex;gap:12px;align-items:flex-start;margin:12px 0;}
+  .num{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;}
+  .col.gold .num{background:var(--gold);color:#3a2c10;}
+  .step .t{font-size:15.5px;}
+  .step .t b{color:var(--ink);}
+  .keytable{width:100%;border-collapse:collapse;margin-top:16px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;overflow:hidden;font-size:14.5px;}
+  .keytable caption{text-align:left;font-size:15px;font-weight:800;color:var(--ink);padding:14px 16px 8px;}
+  .keytable th{background:#F4F1E9;color:var(--ink);font-weight:800;text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule);}
+  .keytable td{padding:10px 14px;border-bottom:1px solid #F0EDE5;vertical-align:top;}
+  .keytable tr:last-child td{border-bottom:none;}
+  .del{color:var(--warn);font-weight:700;}
+  .keep{color:var(--ok);font-weight:700;}
+  .success{background:#EAF5EF;border:1px solid var(--ok);border-radius:14px;padding:16px 20px;margin-top:22px;}
+  .success h3{color:#1f5c48;font-size:16px;margin-bottom:8px;}
+  .success .chk{font-size:15.5px;margin:6px 0;}
+  .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="title">
+    <div class="kicker">공정거래위원회 실전 AI 클래스 · 심화</div>
+    <h1>🛠️ 나만의 ‘사건자료 비식별 앱’ 만들기</h1>
+    <p>Claude에게 부탁해서 → 내 컴퓨터에서 실행 → 비밀엄수 의무 걱정 끝</p>
+  </div>
+
+  <div class="rule">
+    ❗ 딱 하나만 기억하세요 —<br>
+    <b>원본(신고인·진술인 실명 포함)은 내 PC에서만, AI에는 ‘비식별 사본’만 올린다.</b>
+  </div>
+
+  <div class="scope">
+    <h3>📂 이런 자료에 씁니다</h3>
+    <p>신고·민원 접수대장 · 진술조서 요약표 · 거래내역 및 입찰 명세 · 하도급대금 지급현황 · 가맹점·대리점 실태조사 응답 · 소비자 피해 접수 명단</p>
+  </div>
+
+  <div class="promptbox">
+    <div class="lab">📋 아래 글을 그대로 복사해 Claude에 붙여넣기</div>
+    <div class="code">공정거래 사건 자료(엑셀·CSV)의 개인정보와 사업자 식별정보를 '내 컴퓨터 안에서만' 지우는 HTML 웹앱을 한 개 파일로 만들어줘.
+조건:
+1) 파일을 인터넷으로 보내지 말고 브라우저 안에서만 처리
+2) 신고인·진술인 이름은 A001, 사업자명은 갑제1사·을제2사처럼 코드로 치환
+3) 주민등록번호·사업자등록번호·연락처·주소·이메일·계좌번호는 삭제
+4) 업종·지역·거래금액 구간은 그대로 두되 선택하면 삭제도 가능
+5) 치환 대조표(원본 ↔ 코드)를 별도 파일로 따로 저장하는 버튼
+6) 결과를 엑셀(.xlsx)과 CSV로 저장하는 버튼
+7) '샘플 데이터로 체험' 버튼 포함
+8) 40~60대도 쉽게 쓰도록 큰 글씨·한국어로</div>
+    <div class="hint">💡 결과가 마음에 안 들면 “글씨 더 크게”, “계좌번호 뒤 4자리는 남겨줘”처럼 이어서 말하면 고쳐줍니다.</div>
+  </div>
+
+  <div class="two">
+    <div class="col">
+      <div class="head"><span class="badge">경로 A</span><h2>아티팩트로 만들기 (제일 쉬움)</h2></div>
+      <div class="step"><div class="num">1</div><div class="t"><b>claude.ai</b> 접속 → 새 대화</div></div>
+      <div class="step"><div class="num">2</div><div class="t">위 프롬프트 <b>붙여넣기 → 전송</b></div></div>
+      <div class="step"><div class="num">3</div><div class="t">오른쪽에 앱이 생기면 <b>미리보기</b>로 확인</div></div>
+      <div class="step"><div class="num">4</div><div class="t">앱 오른쪽 위 <b>다운로드</b> → HTML 저장</div></div>
+      <div class="step"><div class="num">5</div><div class="t">내 컴퓨터에서 그 파일 <b>더블클릭 → 실행</b></div></div>
+      <div class="step"><div class="num">6</div><div class="t">사건 자료 올리고 <b>‘비식별 실행’</b> → 사본 저장</div></div>
+    </div>
+
+    <div class="col gold">
+      <div class="head"><span class="badge b">경로 B</span><h2>코워크 폴더로 정리하기</h2></div>
+      <div class="step"><div class="num">1</div><div class="t">Claude <b>데스크톱 앱</b> → <b>코워크</b> 탭</div></div>
+      <div class="step"><div class="num">2</div><div class="t"><b>사건별 작업 폴더 지정</b></div></div>
+      <div class="step"><div class="num">3</div><div class="t">위 프롬프트로 앱을 만들어 <b>폴더에 저장</b></div></div>
+      <div class="step"><div class="num">4</div><div class="t">그 HTML을 <b>내 컴퓨터에서 실행</b>해 비식별</div></div>
+      <div class="step"><div class="num">5</div><div class="t">비식별 사본은 작업 폴더, <b>대조표는 별도 보안 폴더</b></div></div>
+      <div class="step"><div class="num">✓</div><div class="t">원본은 <b>모델이 직접 읽지 않게</b> — 실행은 내 PC에서</div></div>
+    </div>
+  </div>
+
+  <table class="keytable">
+    <caption>🔑 무엇을 지우고 무엇을 남길까</caption>
+    <tr><th style="width:30%">항목</th><th style="width:22%">처리</th><th>이유</th></tr>
+    <tr><td>신고인·진술인 성명</td><td class="del">코드 치환</td><td>신고자 보호. 분석에는 구분만 있으면 충분</td></tr>
+    <tr><td>사업자명·상호</td><td class="del">코드 치환</td><td>심사보고서 관례(갑제1사)와 동일하게 관리</td></tr>
+    <tr><td>주민·사업자등록번호</td><td class="del">삭제</td><td>분석에 쓸 일이 없는 순수 식별자</td></tr>
+    <tr><td>연락처·주소·이메일·계좌</td><td class="del">삭제</td><td>유출 시 피해가 가장 직접적</td></tr>
+    <tr><td>업종·지역·거래금액 구간</td><td class="keep">유지</td><td>패턴·쟁점 분석의 핵심 변수</td></tr>
+    <tr><td>거래일자·계약기간</td><td class="keep">유지</td><td>시계열 분석에 필요. 단, 소규모 집단이면 월 단위로</td></tr>
+  </table>
+
+  <div class="success">
+    <h3>✅ 이렇게 되면 성공!</h3>
+    <div class="chk">☐ 신고인·진술인 이름이 <b>A001, A002…</b>로 바뀌었다</div>
+    <div class="chk">☐ 사업자명이 <b>갑제1사·을제2사</b> 코드로 바뀌었다</div>
+    <div class="chk">☐ 주민등록번호·연락처·계좌번호 칸이 <b>사라졌다</b></div>
+    <div class="chk">☐ <b>치환 대조표</b>는 별도 보안 폴더에 따로 보관했다</div>
+    <div class="chk">☐ 이제 그 <b>사본만</b> ChatGPT·Claude에 올려 집계·분석한다</div>
+  </div>
+
+  <div class="foot">AICLab 김진수 · 공정거래위원회 실전 AI 클래스 · “AI는 초안, 책임은 사람”<br>「개인정보 보호법」 제23조 · 「독점규제 및 공정거래에 관한 법률」 제119조(비밀엄수의 의무)</div>
+</div>
+</body>
+</html>
