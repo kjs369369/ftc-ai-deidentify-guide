@@ -61,12 +61,24 @@
   h1 { margin: 10px 0 0; color: var(--black); font-size: clamp(1.7rem, 4vw, 2.35rem); line-height: 1.25; font-weight: 800; }
   .sub { margin: 12px 0 0; color: var(--ink); font-size: 1.05rem; }
 
-  .rule, .note, .scope, .card, .tips, .success { background: var(--paper); border-radius: 16px; }
+  .rule, .note, .scope, .card, .tips, .success, .example { background: var(--paper); border-radius: 16px; }
   .rule { margin-top: 18px; border: 3px solid var(--warn); padding: 16px 18px; text-align: center; }
   .rule p { margin: 0; font-size: 1.12rem; font-weight: 800; color: var(--ink); }
   .rule strong { color: var(--warn); }
   .note { margin-top: 12px; border: 1px solid var(--line); border-left: 8px solid var(--gold); padding: 14px 16px; }
   .note p { margin: 0; font-size: 1.05rem; font-weight: 700; }
+  .example { margin-top: 16px; border: 2px solid var(--black); padding: 16px 18px 18px; }
+  .example p { margin: 8px 0 14px; }
+  .example-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 56px; padding: 12px 20px;
+    background: var(--black); color: #fff; text-decoration: none;
+    font-weight: 800; font-size: 1.05rem; border-radius: 12px;
+    border-bottom: 4px solid var(--gold);
+  }
+  .example-btn:hover { background: #1a1a1a; }
+  .example-btn:focus-visible { outline: 3px solid var(--gold-text); outline-offset: 3px; }
+  @media (max-width: 640px) { .example-btn { width: 100%; } }
 
   .scope { margin-top: 16px; border: 1px solid var(--line); padding: 16px 18px 18px; }
   h2 { margin: 0; color: var(--black); font-size: 1.25rem; line-height: 1.35; }
@@ -163,7 +175,7 @@
   @media (max-width: 640px) {
     html { font-size: 18px; }
     .page { padding: 16px 12px 48px; }
-    header, .rule, .note, .scope, .promptbox, .tips, .card, .success { border-radius: 12px; }
+    header, .rule, .note, .scope, .example, .promptbox, .tips, .card, .success { border-radius: 12px; }
     .prompt-head { align-items: stretch; }
     .copy { width: 100%; }
     .table-wrap { background: transparent; border: 0; overflow: visible; }
@@ -201,6 +213,12 @@
   <div class="note">
     <p>회사 보안 규정이 우선이며, 원본은 내 PC에서만 다룬다. 반출이 막힌 파일은 연습에 쓰지 말고, 샘플로 먼저 해 보세요.</p>
   </div>
+
+  <section class="example" aria-labelledby="example-title">
+    <h2 id="example-title">완성품 예시</h2>
+    <p>강사가 위 조건으로 미리 만들어 둔 화면입니다. 여러분이 Claude로 만든 앱과 모습이 달라도 됩니다.</p>
+    <a class="example-btn" href="app.html">완성품 예시 열어보기</a>
+  </section>
 
   <section class="scope" aria-labelledby="scope-title">
     <h2 id="scope-title">이런 자료에 씁니다</h2>
